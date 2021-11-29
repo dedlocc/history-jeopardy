@@ -1,4 +1,4 @@
-namespace HistoryJeopardy.Models;
+namespace HistoryJeopardy.ViewModels;
 
 public class ErrorViewModel
 {

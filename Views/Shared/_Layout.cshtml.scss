@@ -1,0 +1,33 @@
+﻿body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-color: transparent;
+}
+
+header {
+    margin-bottom: auto;
+}
+
+footer {
+    margin-top: auto;
+    color: var(--bs-secondary);
+
+    a {
+        color: var(--bs-white);
+
+        &:hover {
+            color: var(--bs-gray-300);
+        }
+    }
+}
+
+.copyleft {
+    &:after {
+        content: "\00a9";
+    }
+
+    display: inline-block;
+    transform: scale(-1, 1);
+}

@@ -1,0 +1,47 @@
+#game-grid {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: .5rem;
+
+    caption {
+        caption-side: top;
+        text-align: center;
+        color: inherit;
+        font-size: 2rem;
+        font-weight: bold;
+        padding: 0 0 .5rem;
+    }
+
+    th, td {
+        background-color: #084298;
+        padding: 1rem;
+    }
+
+    th {
+        width: 30%;
+        text-transform: uppercase;
+        word-break: break-word;
+        font-size: 1.5rem;
+    }
+
+    td {
+        color: var(--bs-yellow);
+        font-weight: bold;
+        font-size: 3rem;
+        user-select: none;
+
+        &.completed {
+            filter: contrast(0.5);
+        }
+
+        &:not(.completed) {
+            cursor: pointer;
+            text-shadow: 0 0 1.5rem #ffc107a0;
+
+            &:hover {
+                background: darken(#084298, 7%);
+            }
+        }
+    }
+}

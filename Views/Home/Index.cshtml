@@ -1,8 +1,19 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Create Game";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@if (ViewData.ContainsKey("player")) {
+    <h1>Hello, @((ViewData["player"] as Player)!.Name)</h1>
+}
+
+<form id="player-form">
+    <div class="mb-3">
+        <label for="username-input" class="form-label">Юзернейм</label>
+        <input type="text" id="username-input" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@section Scripts {
+    <script src="~/js/game.js" asp-append-version="true"></script>
+}

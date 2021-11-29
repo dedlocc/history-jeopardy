@@ -1,0 +1,47 @@
+@charset "UTF-8";
+:root {
+  --bs-body-color: var(--bs-white);
+  --bs-secondary: var(--bs-gray-500);
+  font-size: calc(1vmin + 0.15em);
+}
+
+html, body {
+  height: 100%;
+}
+
+html {
+  background: radial-gradient(#031633, #020d1f, black);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background-color: transparent;
+}
+
+header {
+  margin-top: 0.5em;
+  margin-bottom: auto;
+}
+
+footer {
+  margin-top: auto;
+}
+footer a {
+  color: var(--bs-white);
+}
+footer a:hover {
+  color: var(--bs-gray-300);
+}
+
+.copyleft {
+  display: inline-block;
+  transform: scale(-1, 1);
+}
+.copyleft:after {
+  content: "©";
+}
+
+/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,49 @@
+$bgColor: #031633;
+
+:root {
+    --bs-body-color: var(--bs-white);
+    --bs-secondary: var(--bs-gray-500);
+    font-size: calc(1vmin + .15em);
+}
+
+html, body {
+    height: 100%;
+}
+
+html {
+    background: radial-gradient($bgColor, mix($bgColor, black, 60%), black);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-color: transparent;
+}
+
+header {
+    margin-top: .5em;
+    margin-bottom: auto;
+}
+
+footer {
+    margin-top: auto;
+    
+    a {
+        color: var(--bs-white);
+
+        &:hover {
+            color: var(--bs-gray-300);
+        }
+    }
+}
+
+.copyleft {
+    &:after {
+        content: "\00a9";
+    }
+
+    display: inline-block;
+    transform: scale(-1, 1);
+}

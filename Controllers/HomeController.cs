@@ -1,26 +1,43 @@
 ﻿using System.Diagnostics;
+using HistoryJeopardy.Services;
+using HistoryJeopardy.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using HistoryJeopardy.Models;
 
 namespace HistoryJeopardy.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly PlayerService _playerService;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(PlayerService playerService)
     {
-        _logger = logger;
+        _playerService = playerService;
     }
 
     public IActionResult Index()
     {
+        var playerId = HttpContext.Session.GetString("playerId");
+
+        if (playerId is not null) {
+            ViewData["player"] = _playerService.Get(new Guid(playerId));
+        }
+
         return View();
     }
 
-    public IActionResult Privacy()
+    // TODO remove when async page loading is complete
+    [HttpGet("/table")]
+    public IActionResult Table()
     {
         return View();
+    }
+
+    [HttpPost("/auth")]
+    public IActionResult Auth([FromForm] string name)
+    {
+        var player = _playerService.Register(name);
+        HttpContext.Session.SetString("playerId", player.Id.ToString());
+        return Ok();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
