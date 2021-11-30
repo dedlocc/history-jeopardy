@@ -13,6 +13,6 @@ public record Pack(
 {
     public static Pack FromJson(string json)
     {
-        return JsonConvert.DeserializeObject<Pack>(json) ?? throw new JsonException("json huina");
+        return JsonConvert.DeserializeObject<Pack>(json) ?? throw new JsonException("Can't get Pack from Json");
     }
 }
