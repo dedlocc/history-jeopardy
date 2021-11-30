@@ -5,7 +5,7 @@
 
 $(() => {
     $('#player-form').submit(function() {
-        $.post('/auth', {
+        $.post('/api/auth', {
             name: $(this).find('#username-input').val()
         }, () => {
             alert('PeepoHappy');

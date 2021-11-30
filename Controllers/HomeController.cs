@@ -32,14 +32,6 @@ public class HomeController : Controller
         return View();
     }
 
-    [HttpPost("/auth")]
-    public IActionResult Auth([FromForm] string name)
-    {
-        var player = _playerService.Register(name);
-        HttpContext.Session.SetString("playerId", player.Id.ToString());
-        return Ok();
-    }
-
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
