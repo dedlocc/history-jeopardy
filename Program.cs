@@ -5,7 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 services.AddSession();
 services.AddControllersWithViews();
-services.AddRouting(options => options.LowercaseUrls = true);
+services.AddRouting(options => {
+    options.LowercaseUrls = true;
+});
 
 services.AddSingleton<PlayerService>();
 services.AddSingleton<GameService>();

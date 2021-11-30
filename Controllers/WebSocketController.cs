@@ -1,31 +1,23 @@
 using HistoryJeopardy.Models;
 using HistoryJeopardy.Services;
 using HistoryJeopardy.Socket;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Serialization;
 using StreamJsonRpc;
 
 namespace HistoryJeopardy.Controllers;
 
-public class WebSocketController : ControllerBase
+public class WebSocketController : BaseController
 {
-    private readonly PlayerService _playerService;
-    private readonly GameService _gameService;
-
-    public WebSocketController(PlayerService playerService, GameService gameService)
-    {
-        _playerService = playerService;
-        _gameService = gameService;
-    }
+    public WebSocketController(PlayerService playerService, GameService gameService) : base(playerService, gameService)
+    {}
 
     [HttpGet("/ws")]
     public async Task ConnectAsync()
     {
         if (HttpContext.WebSockets.IsWebSocketRequest) {
-            var guid = Guid.NewGuid();
-            var playerId = HttpContext.Session.GetString("playerId");
-
-            if (playerId is null || !_playerService.Players.TryGetValue(new Guid(playerId), out var player)) {
+            if (!PlayerService.TryGet(HttpContext, out var player)) {
                 HttpContext.Response.StatusCode = StatusCodes.Status403Forbidden;
                 return;
             }
@@ -35,7 +27,7 @@ public class WebSocketController : ControllerBase
             var wsHandler = new WebSocketMessageHandler(webSocket);
             ((JsonMessageFormatter) wsHandler.Formatter).JsonSerializer.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
-            using var jsonRpc = new JsonRpc(wsHandler, new Server(guid, _gameService));
+            using var jsonRpc = new JsonRpc(wsHandler, new Server(GameService));
             jsonRpc.StartListening();
 
             var connection = new Connection(webSocket, jsonRpc, HttpContext);

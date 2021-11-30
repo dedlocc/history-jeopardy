@@ -47,3 +47,31 @@ footer {
     display: inline-block;
     transform: scale(-1, 1);
 }
+
+input, label {
+    color: #212529;
+}
+
+#play-form {
+    max-width: 40em;
+    margin: auto;
+    
+    input, .or {
+        font-size: 2em;
+    }
+    
+    [name=invite-code]:not(:placeholder-shown) {
+        text-transform: uppercase;
+        font-family: monospace;
+    }
+    
+    .or {
+        align-self: center;
+    }
+}
+
+#create-btn {
+    width: 100%;
+    height: 100%;
+    font-size: 1.25em;
+}

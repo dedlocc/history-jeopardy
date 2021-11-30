@@ -2,18 +2,21 @@
     ViewData["Title"] = "Create Game";
 }
 
-@if (ViewData.ContainsKey("player")) {
-    <h1>Hello, @((ViewData["player"] as Player)!.Name)</h1>
-}
-
-<form id="player-form">
+<div id="play-form">
     <div class="mb-3">
-        <label for="username-input" class="form-label">Юзернейм</label>
-        <input type="text" id="username-input" class="form-control">
+        <input type="text" name="username" class="form-control" placeholder="Username">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-
-@section Scripts {
-    <script src="~/js/game.js" asp-append-version="true"></script>
-}
+    <div class="row">
+        <div class="col-3">
+            <button type="button" class="btn btn-primary" id="create-btn">New game</button>
+        </div>
+        <div class="col-2 or">or</div>
+        <div class="col-7">
+            <div class="input-group">
+                <input type="text" name="invite-code" class="form-control"
+                       minlength="@Game.InviteCodeLength" maxlength="@Game.InviteCodeLength" placeholder="Invite code">
+                <button type="button" class="btn btn-secondary" id="join-btn">Join</button>
+            </div>
+        </div>
+    </div>
+</div>

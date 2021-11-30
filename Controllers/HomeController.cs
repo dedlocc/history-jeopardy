@@ -1,40 +1,70 @@
-﻿using System.Diagnostics;
+﻿using HistoryJeopardy.Models;
 using HistoryJeopardy.Services;
-using HistoryJeopardy.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace HistoryJeopardy.Controllers;
 
-public class HomeController : Controller
+public class HomeController : BaseController
 {
-    private readonly PlayerService _playerService;
-
-    public HomeController(PlayerService playerService)
-    {
-        _playerService = playerService;
-    }
-
+    public HomeController(PlayerService playerService, GameService gameService) : base(playerService, gameService)
+    {}
+    
     public IActionResult Index()
     {
-        var playerId = HttpContext.Session.GetString("playerId");
+        return View();
+    }
 
-        if (playerId is not null) {
-            ViewData["player"] = _playerService.Get(new Guid(playerId));
+    private Player Auth(string name)
+    {
+        var player = PlayerService.Register(name);
+        HttpContext.Session.SetString("playerId", player.Id.ToString());
+        return player;
+    }
+
+    [HttpGet("/create")]
+    public IActionResult Create([BindRequired] string name)
+    {
+        // TODO validate name
+        if (!ModelState.IsValid) {
+            return ValidationProblem();
+        }
+        
+        var inviteCode = GameService.Create(Auth(name)).InviteCode;
+        
+        if (GameService.InviteCodes.TryGetValue(inviteCode, out _)) {
+            return Content(inviteCode);
         }
 
-        return View();
+        return NotFound();
     }
 
-    // TODO remove when async page loading is complete
-    [HttpGet("/table")]
-    public IActionResult Table()
+    [HttpGet("/join")]
+    public IActionResult Join([BindRequired] string name, [BindRequired] string inviteCode)
     {
-        return View();
+        // TODO validate name
+        if (!ModelState.IsValid) {
+            return ValidationProblem();
+        }
+        
+        var player = Auth(name);
+        
+        // TODO forbid adding the same player twice
+        if (GameService.InviteCodes.TryGetValue(inviteCode, out var game)) {
+            game.Players.Add(player);
+            return Content(inviteCode);
+        }
+
+        return NotFound();
     }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
+    [HttpGet("/room/{invite}")]
+    public IActionResult Play(string invite)
     {
-        return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+        if (!PlayerService.TryGet(HttpContext, out var player)) {
+            return Forbid();
+        }
+        
+        return View();
     }
 }

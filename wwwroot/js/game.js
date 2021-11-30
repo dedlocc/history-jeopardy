@@ -19,7 +19,7 @@
         console.log('WebSocket error', e);
     };
     
-    $("#game-grid td:not(.completed)").click(e => {
+    $("#game-grid td:not(.completed)").click(() => {
         ws.send(JSON.stringify({
             jsonrpc: '2.0',
             method: 'hello',

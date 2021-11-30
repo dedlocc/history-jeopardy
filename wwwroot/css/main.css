@@ -44,4 +44,29 @@ footer a:hover {
   content: "©";
 }
 
+input, label {
+  color: #212529;
+}
+
+#play-form {
+  max-width: 40em;
+  margin: auto;
+}
+#play-form input, #play-form .or {
+  font-size: 2em;
+}
+#play-form [name=invite-code]:not(:placeholder-shown) {
+  text-transform: uppercase;
+  font-family: monospace;
+}
+#play-form .or {
+  align-self: center;
+}
+
+#create-btn {
+  width: 100%;
+  height: 100%;
+  font-size: 1.25em;
+}
+
 /*# sourceMappingURL=main.css.map */

@@ -1,15 +1,22 @@
-﻿function loadPage(page)
-{
-    // TODO
-}
+﻿/*function loadPage(page = '/') {
+    $.post(page, {}, response => {
+        $('main').html(response);
+    });
+}*/
 
 $(() => {
-    $('#player-form').submit(function() {
-        $.post('/api/auth', {
-            name: $(this).find('#username-input').val()
-        }, () => {
-            alert('PeepoHappy');
+    for (const action of ['create', 'join']) {
+        $(`#${action}-btn`).click(function () {
+            $.ajax(`/${action}`, {
+                method: 'GET',
+                data: {
+                    name: $('[name=username]').val(),
+                    inviteCode: $('[name=invite-code]').val(),
+                },
+                success: inviteCode => location.assign('/room/' + inviteCode),
+                error: () => alert('лох'),
+            });
+            return false;
         });
-        return false;
-    });
+    }
 });
