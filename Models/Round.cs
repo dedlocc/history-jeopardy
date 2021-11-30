@@ -1,7 +1,13 @@
-﻿namespace HistoryJeopardy.Models;
+﻿using Newtonsoft.Json;
 
+namespace HistoryJeopardy.Models;
+
+[JsonObject]
 public record Round(
+    [JsonProperty("number")]
     uint Number,
-    string Name,
+    [JsonProperty("title")]
+    string Title,
+    [JsonProperty("categories")]
     List<Category> Categories
 );
