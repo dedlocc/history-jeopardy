@@ -9,7 +9,7 @@ public class HomeController : BaseController
 {
     public HomeController(PlayerService playerService, GameService gameService) : base(playerService, gameService)
     {}
-    
+
     public IActionResult Index()
     {
         return View();
@@ -29,9 +29,9 @@ public class HomeController : BaseController
         if (!ModelState.IsValid) {
             return ValidationProblem();
         }
-        
+
         var inviteCode = GameService.Create(Auth(name)).InviteCode;
-        
+
         if (GameService.InviteCodes.TryGetValue(inviteCode, out _)) {
             return Content(inviteCode);
         }
@@ -46,9 +46,9 @@ public class HomeController : BaseController
         if (!ModelState.IsValid) {
             return ValidationProblem();
         }
-        
+
         var player = Auth(name);
-        
+
         // TODO forbid adding the same player twice
         if (GameService.InviteCodes.TryGetValue(inviteCode, out var game)) {
             game.Players.Add(player);
@@ -64,7 +64,7 @@ public class HomeController : BaseController
         if (!PlayerService.TryGet(HttpContext, out var player)) {
             return Forbid();
         }
-        
+
         return View();
     }
 }

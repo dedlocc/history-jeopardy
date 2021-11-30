@@ -23,12 +23,12 @@ public class PlayerService
     {
         // TODO remove from here
         var id = httpContext.Session.GetString("playerId");
-        
+
         if (id is null) {
             player = null;
             return false;
         }
-        
+
         return Players.TryGetValue(new Guid(id), out player);
     }
 }

@@ -5,10 +5,8 @@ namespace HistoryJeopardy.Models;
 
 [JsonObject]
 public record Pack(
-    [JsonProperty("name")]
-    string Name,
-    [JsonProperty("rounds")]
-    List<Round> Rounds
+    [JsonProperty("name")] string Name,
+    [JsonProperty("rounds")] List<Round> Rounds
 )
 {
     public static Pack FromJson(string json)
