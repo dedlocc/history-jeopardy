@@ -1,7 +1,6 @@
 ﻿using HistoryJeopardy.Models;
 using HistoryJeopardy.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace HistoryJeopardy.Controllers;
 
@@ -12,10 +11,19 @@ public class HomeController : BaseController
 
     public IActionResult Index()
     {
-        return View();
+        if (!PlayerService.TryGet(HttpContext, out var player)) {
+            player = PlayerService.Register("");
+            HttpContext.Session.SetString("playerId", player.Id.ToString());
+
+            GameService.Create(player, new GameOptions {
+                Pack = Pack.FromFile("Pack.json"),
+            });
+        }
+
+        return View("Play", player.Game);
     }
 
-    private Player Auth(string name)
+    /*private Player Auth(string name)
     {
         var player = PlayerService.Register(name);
         HttpContext.Session.SetString("playerId", player.Id.ToString());
@@ -49,6 +57,7 @@ public class HomeController : BaseController
 
         var player = Auth(name);
 
+        // TODO forbid joining a game while in another
         // TODO forbid adding the same player twice
         if (GameService.InviteCodes.TryGetValue(inviteCode, out var game)) {
             game.Players.Add(player);
@@ -61,10 +70,14 @@ public class HomeController : BaseController
     [HttpGet("/room/{invite}")]
     public IActionResult Play(string invite)
     {
-        if (!PlayerService.TryGet(HttpContext, out var player)) {
+        // TODO [no rush] add support for joining directly via link
+        if (
+            !PlayerService.TryGet(HttpContext, out var player) ||
+            !GameService.InviteCodes.TryGetValue(invite, out var game)
+        ) {
             return Forbid();
         }
 
         return View();
-    }
+    }*/
 }

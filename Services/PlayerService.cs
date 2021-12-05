@@ -19,16 +19,18 @@ public class PlayerService
         return Players.GetValueOrDefault(id);
     }
 
-    public bool TryGet(HttpContext httpContext, [MaybeNullWhen(false)] out Player player)
+
+    public Player? Get(HttpContext httpContext)
     {
         // TODO remove from here
         var id = httpContext.Session.GetString("playerId");
 
-        if (id is null) {
-            player = null;
-            return false;
-        }
+        return id is null ? null : Players.GetValueOrDefault(new Guid(id));
+    }
 
-        return Players.TryGetValue(new Guid(id), out player);
+    public bool TryGet(HttpContext httpContext, [MaybeNullWhen(false)] out Player player)
+    {
+        player = Get(httpContext);
+        return player is not null;
     }
 }

@@ -1,52 +1,29 @@
+@model Game
 @{
     ViewData["Title"] = "Game";
+    var game = Model!;
+    var round = game.Pack.Rounds.First();
 }
 
 <table id="game-grid">
-    <caption>Раунд I: Царь-реформатор</caption>
+    <caption>Раунд @(new string('I', (int) round.Number)): @round.Title</caption>
     <tbody>
-    <tr>
-        <th scope="row">Окружение Петра I</th>
-        <td>100</td>
-        <td class="completed">200</td>
-        <td>300</td>
-        <td>400</td>
-        <td>500</td>
-    </tr>
-    <tr>
-        <th scope="row">Мифы и легенды</th>
-        <td>100</td>
-        <td>200</td>
-        <td class="completed">300</td>
-        <td class="completed">400</td>
-        <td>500</td>
-    </tr>
-    <tr>
-        <th scope="row">Разносторонний правитель</th>
-        <td>100</td>
-        <td>200</td>
-        <td>300</td>
-        <td>400</td>
-        <td>500</td>
-    </tr>
-    <tr>
-        <th scope="row">Дела семейные</th>
-        <td>100</td>
-        <td>200</td>
-        <td>300</td>
-        <td>400</td>
-        <td>500</td>
-    </tr>
-    <tr>
-        <th scope="row">Дела военные</th>
-        <td>100</td>
-        <td>200</td>
-        <td>300</td>
-        <td>400</td>
-        <td>500</td>
-    </tr>
+    @foreach (var (category, i) in round.Categories.Select((c, i) => (c, i))) {
+        <tr>
+            <th scope="row">@category.Name</th>
+            @foreach (var (question, j) in category.Questions.Select((c, j) => (c, j))) {
+                <td data-question="@i-@j"@Html.Raw(game.CompletedQuestions.Contains(question) ? "class=\"completed\"" : "")>@question.Price</td>
+            }
+        </tr>
+    }
     </tbody>
 </table>
+
+<div id="question">
+    <div class="text"></div>
+    <button type="button" class="answer">Я знаю ответ!</button>
+    <button type="button" class="skip">Я не знаю ответ!</button>
+</div>
 
 @section Scripts {
     <script src="~/js/game.js" asp-append-version="true"></script>

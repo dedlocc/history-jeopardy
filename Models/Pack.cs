@@ -13,4 +13,9 @@ public record Pack(
     {
         return JsonConvert.DeserializeObject<Pack>(json) ?? throw new JsonException("Can't get Pack from Json");
     }
+
+    public static Pack FromFile(string path)
+    {
+        return FromJson(File.ReadAllText(path));
+    }
 }

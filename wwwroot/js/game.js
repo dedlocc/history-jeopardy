@@ -1,34 +1,27 @@
 ﻿$(() => {
-    const ws = new WebSocket(`ws://${location.host}/ws`);
 
-    ws.onopen = e => {
-        console.log('WebSocket opened', e);
-    };
+    $('#game-grid td:not(.completed)').click(function () {
+        $('#game-grid').hide();
 
-    ws.onclose = e => {
-        console.log('WebSocket closed', e);
-    };
+        const answerHandler = answer => {
+            $.post('/answer', {answer}, result => {
+                const prefix = answer ? (result.isCorrect ? 'Правильно' : 'Нет') + '. ' : '';
+                alert(prefix + result.correctAnswer);
 
-    ws.onmessage = e => {
-        const data = JSON.parse(e.data);
-        console.log('WebSocket message received: ', data, e);
-        alert(data.result.message);
-    };
+                $(this).addClass('completed');
+                $('#question').hide();
+                $('#game-grid').show();
+            }, 'json');
+        }
 
-    ws.onerror = e => {
-        console.log('WebSocket error', e);
-    };
+        const questionId = $(this).data('question');
 
-    $("#game-grid td:not(.completed)").click(() => {
-        ws.send(JSON.stringify({
-            jsonrpc: '2.0',
-            method: 'hello',
-            params: [
-                {
-                    name: prompt('Do you know da way?')
-                }
-            ],
-            id: null
-        }));
+        $.post('/question', {questionId}, text => {
+            $('#question .text').text(text);
+            $('#question').show();
+
+            $('#question button.answer').unbind().click(() => answerHandler(prompt(text)));
+            $('#question button.skip').unbind().click(() => answerHandler(null));
+        });
     });
 });

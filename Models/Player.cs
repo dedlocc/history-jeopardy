@@ -4,6 +4,7 @@ public class Player
 {
     public readonly Guid Id = Guid.NewGuid();
     public readonly string Name;
+    public int Points { get; private set; } = 0;
     public readonly List<Connection> Connections = new();
     public Game? Game;
 
