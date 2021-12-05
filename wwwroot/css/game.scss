@@ -48,4 +48,33 @@
 
 #question {
     display: none;
+    
+    .text {
+        border: 3px solid gray;
+        color: var(--bs-yellow);
+        background-color: #084298;
+        font-size: 3rem;
+        border-radius: 10px;
+        padding: 0.2rem 0;
+        text-shadow: 0 0 1.5rem #ffc107a0;
+    }
+    
+    button {
+        display: inline-block;
+        color: white;
+        background: linear-gradient(to bottom, #00acee, #0072e0);
+        font-size: 18px;
+        font-weight: 500;
+        padding: 12px 26px;
+        border-radius: 100px;
+        border: 3px solid transparent;
+        text-decoration: none;
+        margin: 1.5rem;
+
+        &--outline {
+            background: transparent;
+            color: gray;
+            border-color: gray;
+        }
+    }
 }
