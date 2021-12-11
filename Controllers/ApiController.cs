@@ -49,12 +49,16 @@ public class ApiController : BaseController
         }
 
         var game = player.Game;
+        var question = game?.CurrentQuestion;
         if (game is null || !game.TryGetAnswer(out var correctAnswer)) {
             return BadRequest();
         }
 
+        var isCorrect = correctAnswer.Match(answer);
+        player.Points += isCorrect ? question!.Price : -question!.Price;
+
         return Json(new {
-            IsCorrect = correctAnswer.Match(answer),
+            IsCorrect = isCorrect,
             CorrectAnswer = correctAnswer.Get(),
         });
     }
