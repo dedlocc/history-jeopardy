@@ -31,7 +31,7 @@ public class Game
         Pack = options.Pack;
     }
 
-    public bool TryAnswer([MaybeNullWhen(false)] out string answer)
+    public bool TryGetAnswer([MaybeNullWhen(false)] out IAnswer answer)
     {
         if (CurrentQuestion is null) {
             answer = null;

@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using JsonException = Newtonsoft.Json.JsonException;
+﻿using HistoryJeopardy.Util;
+using Newtonsoft.Json;
 
 namespace HistoryJeopardy.Models;
 
@@ -11,7 +11,8 @@ public record Pack(
 {
     public static Pack FromJson(string json)
     {
-        return JsonConvert.DeserializeObject<Pack>(json) ?? throw new JsonException("Can't get Pack from Json");
+        return JsonConvert.DeserializeObject<Pack>(json, new AnswerConverter())
+               ?? throw new JsonSerializationException("Can't get Pack from Json");
     }
 
     public static Pack FromFile(string path)
