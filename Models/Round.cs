@@ -4,7 +4,9 @@ namespace HistoryJeopardy.Models;
 
 [JsonObject]
 public record Round(
-    [JsonProperty("number")] uint Number,
     [JsonProperty("title")] string Title,
     [JsonProperty("categories")] List<Category> Categories
-);
+)
+{
+    public List<Question> Questions => Categories.SelectMany(c => c.Questions).ToList();
+};

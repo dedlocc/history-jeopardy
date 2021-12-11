@@ -53,18 +53,13 @@ public class ApiController : BaseController
             return BadRequest();
         }
 
-        var question = game.CurrentQuestion;
-        if (question is null || game.CompletedQuestions.Contains(question)) {
+        if (!game.TryAnswer(out var correctAnswer)) {
             return BadRequest();
         }
 
-        // TODO move to some Game method
-        game.CurrentQuestion = null;
-        game.CompletedQuestions.Add(question);
-
         return Json(new {
-            IsCorrect = question.Answer == answer,
-            CorrectAnswer = question.Answer,
+            IsCorrect = answer == correctAnswer,
+            CorrectAnswer = correctAnswer,
         });
     }
 }

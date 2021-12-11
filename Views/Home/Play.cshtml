@@ -2,13 +2,12 @@
 @{
     ViewData["Title"] = "Game";
     var game = Model!;
-    var round = game.Pack.Rounds.First();
 }
 
 <table id="game-grid">
-    <caption>Раунд @(new string('I', (int) round.Number)): @round.Title</caption>
+    <caption>Раунд @(new string('I', game.CurrentRoundId + 1)): @game.CurrentRound.Title</caption>
     <tbody>
-    @foreach (var (category, i) in round.Categories.Select((c, i) => (c, i))) {
+    @foreach (var (category, i) in game.CurrentRound.Categories.Select((c, i) => (c, i))) {
         <tr>
             <th scope="row">@category.Name</th>
             @foreach (var (question, j) in category.Questions.Select((c, j) => (c, j))) {

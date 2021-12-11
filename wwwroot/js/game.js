@@ -8,9 +8,13 @@
                 const prefix = answer ? (result.isCorrect ? 'Правильно' : 'Нет') + '. ' : '';
                 alert(prefix + result.correctAnswer);
 
-                $(this).addClass('completed');
+                $(this).addClass('completed').unbind();
                 $('#question').hide();
                 $('#game-grid').show();
+
+                if ($('#game-grid td:not(.completed)').length === 0) {
+                    location.reload();
+                }
             }, 'json');
         }
 

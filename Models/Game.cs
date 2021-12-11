@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace HistoryJeopardy.Models;
 
 public class Game
@@ -12,7 +14,7 @@ public class Game
 
     public readonly Pack Pack;
 
-    public readonly int CurrentRoundId = 0;
+    public int CurrentRoundId { get; private set; } = 0;
     public Round CurrentRound => Pack.Rounds[CurrentRoundId];
     public Question? CurrentQuestion = null;
 
@@ -27,6 +29,24 @@ public class Game
     {
         Host = host;
         Pack = options.Pack;
+    }
+
+    public bool TryAnswer([MaybeNullWhen(false)] out string answer)
+    {
+        if (CurrentQuestion is null) {
+            answer = null;
+            return false;
+        }
+
+        CompletedQuestions.Add(CurrentQuestion);
+        if (CompletedQuestions.Count == CurrentRound.Questions.Count) {
+            ++CurrentRoundId;
+            CompletedQuestions.Clear();
+        }
+
+        answer = CurrentQuestion.Answer;
+        CurrentQuestion = null;
+        return true;
     }
 }
 
