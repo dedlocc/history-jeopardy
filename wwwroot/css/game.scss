@@ -1,3 +1,6 @@
+$bgColor: #084298;
+$yellowTextColor: #ffc107a0;
+
 #game-grid {
     width: 100%;
     table-layout: fixed;
@@ -14,7 +17,7 @@
     }
 
     th, td {
-        background-color: #084298;
+        background-color: $bgColor;
         padding: 1rem;
     }
 
@@ -37,10 +40,10 @@
 
         &:not(.completed) {
             cursor: pointer;
-            text-shadow: 0 0 1.5rem #ffc107a0;
+            text-shadow: 0 0 1.5rem $yellowTextColor;
 
             &:hover {
-                background: darken(#084298, 7%);
+                background: darken($bgColor, 7%);
             }
         }
     }
@@ -48,33 +51,20 @@
 
 #question {
     display: none;
-    
+
     .text {
         border: 3px solid gray;
         color: var(--bs-yellow);
-        background-color: #084298;
-        font-size: 3rem;
+        background-color: $bgColor;
+        font-size: 2.5em;
         border-radius: 10px;
-        padding: 0.2rem 0;
-        text-shadow: 0 0 1.5rem #ffc107a0;
+        padding: .5em;
+        text-shadow: 0 0 .5em $yellowTextColor;
     }
-    
-    button {
-        display: inline-block;
-        color: white;
-        background: linear-gradient(to bottom, #00acee, #0072e0);
-        font-size: 18px;
-        font-weight: 500;
-        padding: 12px 26px;
-        border-radius: 100px;
-        border: 3px solid transparent;
-        text-decoration: none;
-        margin: 1.5rem;
 
-        &--outline {
-            background: transparent;
-            color: gray;
-            border-color: gray;
-        }
+    button {
+        margin: 1.5em 1em 0;
+        padding: .6em 1em;
+        font-size: min(1vmin + 1vmax, 16px);
     }
 }

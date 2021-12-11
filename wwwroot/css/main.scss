@@ -1,4 +1,4 @@
-$bgColor: #031633;
+$bodyColor: #031633;
 
 :root {
     --bs-body-color: var(--bs-white);
@@ -11,7 +11,7 @@ html, body {
 }
 
 html {
-    background: radial-gradient($bgColor, mix($bgColor, black, 60%), black);
+    background: radial-gradient($bodyColor, mix($bodyColor, black, 60%), black);
 }
 
 body {
@@ -29,7 +29,7 @@ header {
 
 footer {
     margin-top: auto;
-    
+
     a {
         color: var(--bs-white);
 
@@ -55,16 +55,16 @@ input, label {
 #play-form {
     max-width: 40em;
     margin: auto;
-    
+
     input, .or {
         font-size: 2em;
     }
-    
+
     [name=invite-code]:not(:placeholder-shown) {
         text-transform: uppercase;
         font-family: monospace;
     }
-    
+
     .or {
         align-self: center;
     }
