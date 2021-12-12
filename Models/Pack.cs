@@ -12,7 +12,7 @@ public record Pack(
     public static Pack FromJson(string json)
     {
         return JsonConvert.DeserializeObject<Pack>(json, new AnswerConverter())
-               ?? throw new JsonSerializationException("Can't get Pack from Json");
+            ?? throw new JsonSerializationException("Can't get Pack from Json");
     }
 
     public static Pack FromFile(string path)
