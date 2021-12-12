@@ -54,7 +54,7 @@ public class ApiController : BaseController
             return BadRequest();
         }
 
-        var isCorrect = answer is not null && question.Answer.Match(answer);
+        var isCorrect = answer is not null && question.Answer.Match(answer.Trim());
 
         if (answer is not null) {
             player.Points += isCorrect ? question.Price : -question.Price;
