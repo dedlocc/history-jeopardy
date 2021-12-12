@@ -8,6 +8,8 @@
                 const prefix = answer ? (result.isCorrect ? 'Правильно' : 'Нет') + '. ' : '';
                 alert(prefix + result.correctAnswer);
 
+                $('.score').text(result.playerPoints);
+
                 $(this).addClass('completed').unbind();
                 $('#question').hide();
                 $('#game-grid').show();

@@ -1,9 +1,11 @@
-@model Game
+@model Player
 @{
     ViewData["Title"] = "Game";
-    var game = Model!;
+    var player = Model!;
+    var game = player.Game;
 }
 
+<div class="score-div">Your score: <span class="score">@player.Points</span></div>
 <table id="game-grid">
     <caption>Раунд @(new string('I', game.CurrentRoundId + 1)): @game.CurrentRound.Title</caption>
     <tbody>

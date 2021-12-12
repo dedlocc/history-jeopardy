@@ -20,7 +20,7 @@ public class HomeController : BaseController
             });
         }
 
-        return View("Play", player.Game);
+        return View("Play", player);
     }
 
     /*private Player Auth(string name)

@@ -57,4 +57,9 @@
   font-size: min(1vmin + 1vmax, 16px);
 }
 
+.score-div {
+  text-align: right;
+  font-size: 3rem;
+}
+
 /*# sourceMappingURL=game.css.map */

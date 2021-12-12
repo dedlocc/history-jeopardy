@@ -60,6 +60,7 @@ public class ApiController : BaseController
         return Json(new {
             IsCorrect = isCorrect,
             CorrectAnswer = correctAnswer.Get(),
+            PlayerPoints = player.Points,
         });
     }
 }
