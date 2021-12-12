@@ -38,10 +38,7 @@ public class ApiController : BaseController
 
         game.CurrentQuestion = question;
 
-        return Json(new {
-            Text = game.CurrentQuestion.Text,
-            Picture = game.CurrentQuestion.PictureUri,
-        });
+        return PartialView("~/Views/Home/Question.cshtml", question);
     }
 
     [HttpPost("/answer")]

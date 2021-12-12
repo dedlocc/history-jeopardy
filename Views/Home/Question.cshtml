@@ -1,0 +1,35 @@
+@using HistoryJeopardy.Models.Answers
+@using HistoryJeopardy.Util
+@model Question
+@{
+    var question = Model!;
+}
+
+@if (question.PictureUri is not null) {
+    <img class="picture" src="" alt="Вопрос-картинка">
+}
+@switch (question.Answer) {
+    case SingleOptionAnswer a:
+        <form>
+            @foreach (var (option, i) in a.Options.All.Shuffle().Select((e, i) => (e, i))) {
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="answer" id="answer-@i">
+                    <label class="form-check-label" for="answer-@i">@option</label>
+                </div>
+            }
+        </form>
+        break;
+    case MultiOptionAnswer a:
+        <form>
+            @foreach (var (option, i) in a.Options.All.Shuffle().Select((e, i) => (e, i))) {
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="answer" id="answer-@i">
+                    <label class="form-check-label" for="answer-@i">@option</label>
+                </div>
+            }
+        </form>
+        break;
+    default:
+        <p class="text">@question.Text</p>
+        break;
+}

@@ -23,7 +23,7 @@ public class AnswerConverter : JsonConverter<Answer>
         return (Answer?) (type.Value.ToObject<string>() switch {
             "exact" => obj.ToObject<ExactAnswer>(),
             "keywords" => obj.ToObject<KeywordsAnswer>(),
-            "option" => obj.ToObject<OptionAnswer>(),
+            "option" => obj.ToObject<SingleOptionAnswer>(),
             "multiOption" => obj.ToObject<MultiOptionAnswer>(),
             _ => throw new JsonSerializationException("Unknown answer type"),
         }) ?? throw new JsonSerializationException("Unable to deserialize answer");

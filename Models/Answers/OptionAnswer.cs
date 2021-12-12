@@ -3,15 +3,14 @@ using Newtonsoft.Json;
 namespace HistoryJeopardy.Models.Answers;
 
 [JsonObject]
-public abstract class BaseOptionalAnswer : Answer
+public abstract class BaseOptionAnswer : Answer
 {
     [JsonProperty("data")] public Options Options = null!;
 }
 
 [JsonObject]
-public class OptionAnswer : BaseOptionalAnswer
+public class SingleOptionAnswer : BaseOptionAnswer
 {
-
     public override bool Match(string answer)
     {
         return Options.Correct.First() == answer;
@@ -19,7 +18,7 @@ public class OptionAnswer : BaseOptionalAnswer
 }
 
 [JsonObject]
-public class MultiOptionAnswer : BaseOptionalAnswer
+public class MultiOptionAnswer : BaseOptionAnswer
 {
     public override bool Match(string answer)
     {
@@ -31,4 +30,7 @@ public class MultiOptionAnswer : BaseOptionalAnswer
 public record Options(
     HashSet<string> Correct,
     HashSet<string> Incorrect
-);
+)
+{
+    public readonly List<string> All = Correct.Concat(Incorrect).ToList();
+}

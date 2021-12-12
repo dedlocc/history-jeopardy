@@ -34,7 +34,7 @@
         });
 
         $.post('/question', {questionId: $(this).data('question')}, question => {
-            $('#question .text').text(question.text);
+            $('#question .content').html(question);
 
             if (question.picture) {
                 $('#question .picture').attr('src', question.picture).show();
@@ -51,7 +51,7 @@
             });
 
             $('#question button.skip').unbind().click(() => answerHandler(''));
-        }, 'json');
+        });
     });
 
     $('#answer button').unbind().click(() => {
