@@ -5,8 +5,7 @@
         $('#game-grid').hide();
 
         const answerHandler = answer => {
-            $.post('/answer', { answer }, result => {
-
+            $.post('/answer', {answer}, result => {
                 $('.score').text(result.playerPoints);
 
                 $(this).addClass('completed').unbind();
@@ -20,21 +19,35 @@
                     }
                 }
 
+                $('#answer-input').hide();
                 $('#answer .text').text(result.correctAnswer);
                 $('#answer').show();
             }, 'json');
         };
 
-        $.post('/question', { questionId: $(this).data('question') }, text => {
+        $('#answer-input form').unbind().submit(function () {
+            const $answer = $(this).find('[name=answer]');
+            answerHandler($answer.val());
+            $answer.val('');
+
+            return false;
+        });
+
+        $.post('/question', {questionId: $(this).data('question')}, text => {
             $('#question .text').text(text);
+            $('#question > button').show();
             $('#question').show();
 
-            $('#question button.answer').unbind().click(() => answerHandler(prompt(text)));
+            $('#question button.answer').unbind().click(() => {
+                $('#question > button').hide();
+                $('#answer-input').show();
+            });
+            
             $('#question button.skip').unbind().click(() => answerHandler(''));
         });
     });
 
-    $('#answer button').click(() => {
+    $('#answer button').unbind().click(() => {
         $('#answer').hide();
         $('#answer .status').hide();
         $('#game-grid').show();

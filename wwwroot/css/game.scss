@@ -82,3 +82,18 @@ $yellowTextColor: #ffc107a0;
         font-weight: bold;
     }
 }
+
+#answer-input {
+    display: none;
+
+    input {
+        margin-top: 1em;
+        font-size: 2em;
+        border-radius: 10px;
+
+        transform: scale(.993, .94);
+        transition: transform .5s, opacity .25s;
+
+        box-shadow: 0 0 1em $yellowTextColor;
+    }
+}
