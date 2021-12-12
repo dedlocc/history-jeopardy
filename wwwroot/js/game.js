@@ -33,8 +33,15 @@
             return false;
         });
 
-        $.post('/question', {questionId: $(this).data('question')}, text => {
-            $('#question .text').text(text);
+        $.post('/question', {questionId: $(this).data('question')}, question => {
+            $('#question .text').text(question.text);
+
+            if (question.picture) {
+                $('#question .picture').attr('src', question.picture).show();
+            } else {
+                $('#question .picture').hide();
+            }
+
             $('#question > button').show();
             $('#question').show();
 
@@ -42,9 +49,9 @@
                 $('#question > button').hide();
                 $('#answer-input').show();
             });
-            
+
             $('#question button.skip').unbind().click(() => answerHandler(''));
-        });
+        }, 'json');
     });
 
     $('#answer button').unbind().click(() => {

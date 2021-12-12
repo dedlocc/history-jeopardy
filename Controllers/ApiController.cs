@@ -38,7 +38,10 @@ public class ApiController : BaseController
 
         game.CurrentQuestion = question;
 
-        return Content(game.CurrentQuestion.Text);
+        return Json(new {
+            Text = game.CurrentQuestion.Text,
+            Picture = game.CurrentQuestion.PictureUri,
+        });
     }
 
     [HttpPost("/answer")]

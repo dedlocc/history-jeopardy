@@ -52,14 +52,25 @@ $yellowShadowColor: #ffc107a0;
 #question, #answer {
     display: none;
 
-    .text {
+    .content {
         border: 3px solid gray;
-        color: var(--bs-yellow);
         background-color: $bgColor;
-        font-size: 2.5em;
         border-radius: 10px;
         padding: .5em;
-        text-shadow: 0 0 .5em $yellowShadowColor;
+
+        .picture {
+            display: none;
+            max-width: 80%;
+            max-height: 30em;
+            margin: auto;
+        }
+
+        .text {
+            font-size: 2.5em;
+            color: var(--bs-yellow);
+            text-shadow: 0 0 .5em $yellowShadowColor;
+            margin: 0;
+        }
     }
 
     button {

@@ -7,5 +7,6 @@ namespace HistoryJeopardy.Models;
 public record Question(
     [JsonProperty("price")] int Price,
     [JsonProperty("question")] string Text,
-    [JsonProperty("answer")] Answer Answer
+    [JsonProperty("answer")] Answer Answer,
+    [JsonProperty("picture")] Uri? PictureUri
 );
