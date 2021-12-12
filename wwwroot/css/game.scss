@@ -69,7 +69,11 @@ $yellowTextColor: #ffc107a0;
     }
 }
 
-.score-div {
+#score-container {
     text-align: right;
-    font-size: 3rem;
+    font-size: 2.7em;
+
+    .score {
+        font-weight: bold;
+    }
 }
