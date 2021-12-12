@@ -6,17 +6,14 @@
         const answerHandler = answer => {
             $.post('/answer', {answer}, result => {
                 const prefix = answer ? (result.isCorrect ? 'Правильно' : 'Нет') + '. ' : '';
-                alert(prefix + result.correctAnswer);
 
                 $('.score').text(result.playerPoints);
 
                 $(this).addClass('completed').unbind();
                 $('#question').hide();
-                $('#game-grid').show();
 
-                if ($('#game-grid td:not(.completed)').length === 0) {
-                    location.reload();
-                }
+                $('#answer .text').text(prefix + result.correctAnswer);
+                $('#answer').show();
             }, 'json');
         }
 
@@ -29,5 +26,14 @@
             $('#question button.answer').unbind().click(() => answerHandler(prompt(text)));
             $('#question button.skip').unbind().click(() => answerHandler(null));
         });
+    });
+    
+    $('#answer button').click(function () {
+        $('#answer').hide();
+        $('#game-grid').show();
+
+        if ($('#game-grid td:not(.completed)').length === 0) {
+            location.reload();
+        }
     });
 });

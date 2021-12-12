@@ -49,7 +49,7 @@ $yellowTextColor: #ffc107a0;
     }
 }
 
-#question {
+#question, #answer {
     display: none;
 
     .text {
@@ -72,5 +72,4 @@ $yellowTextColor: #ffc107a0;
 .score-div {
     text-align: right;
     font-size: 3rem;
-    
 }

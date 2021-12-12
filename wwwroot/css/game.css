@@ -39,10 +39,10 @@
   background: #063376;
 }
 
-#question {
+#question, #answer {
   display: none;
 }
-#question .text {
+#question .text, #answer .text {
   border: 3px solid gray;
   color: var(--bs-yellow);
   background-color: #084298;
@@ -51,7 +51,7 @@
   padding: 0.5em;
   text-shadow: 0 0 0.5em #ffc107a0;
 }
-#question button {
+#question button, #answer button {
   margin: 1.5em 1em 0;
   padding: 0.6em 1em;
   font-size: min(1vmin + 1vmax, 16px);
