@@ -34,9 +34,9 @@
         });
 
         $.post('/question', {questionId: $(this).data('question')}, question => {
-            $('#question .content').html(question);
+            $('#question').html(question).show();
 
-            if (question.picture) {
+            /*if (question.picture) {
                 $('#question .picture').attr('src', question.picture).show();
             } else {
                 $('#question .picture').hide();
@@ -50,7 +50,7 @@
                 $('#answer-input').show();
             });
 
-            $('#question button.skip').unbind().click(() => answerHandler(''));
+            $('#question button.skip').unbind().click(() => answerHandler(''));*/
         });
     });
 

@@ -3,33 +3,42 @@
 @model Question
 @{
     var question = Model!;
+    var answer = question.Answer;
 }
 
-@if (question.PictureUri is not null) {
-    <img class="picture" src="" alt="Вопрос-картинка">
-}
-@switch (question.Answer) {
-    case SingleOptionAnswer a:
-        <form>
-            @foreach (var (option, i) in a.Options.All.Shuffle().Select((e, i) => (e, i))) {
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="answer" id="answer-@i">
-                    <label class="form-check-label" for="answer-@i">@option</label>
-                </div>
-            }
-        </form>
-        break;
-    case MultiOptionAnswer a:
-        <form>
-            @foreach (var (option, i) in a.Options.All.Shuffle().Select((e, i) => (e, i))) {
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="answer" id="answer-@i">
-                    <label class="form-check-label" for="answer-@i">@option</label>
-                </div>
-            }
-        </form>
-        break;
-    default:
-        <p class="text">@question.Text</p>
-        break;
-}
+<div class="content">
+    @if (question.PictureUri is not null) {
+        <img class="picture" src="@question.PictureUri" alt="Вопрос-картинка">
+    }
+    <p class="text">@question.Text</p>
+</div>
+
+<button type="button" class="btn btn-success answer">Я знаю ответ</button>
+<button type="button" class="btn btn-danger skip">Я не знаю ответ</button>
+
+<div id="answer-input">
+    <form class="answer-input-form">
+        @switch (answer) {
+            case SingleOptionAnswer a:
+                @foreach (var (option, i) in a.Options.All.Shuffle().Select((e, i) => (e, i))) {
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="answer" id="answer-@i">
+                        <label class="form-check-label" for="answer-@i">@option</label>
+                    </div>
+                }
+                break;
+            case MultiOptionAnswer a:
+                @foreach (var (option, i) in a.Options.All.Shuffle().Select((e, i) => (e, i))) {
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="answer" id="answer-@i">
+                        <label class="form-check-label" for="answer-@i">@option</label>
+                    </div>
+                }
+                break;
+            default:
+                <input class="form-control" name="answer" placeholder="Введите ответ"/>
+                <button type="submit" class="btn btn-success answer">Отправить</button>
+                break;
+        }
+    </form>
+</div>
