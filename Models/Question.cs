@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using HistoryJeopardy.Models.Answers;
+using Newtonsoft.Json;
 
 namespace HistoryJeopardy.Models;
 
@@ -6,5 +7,5 @@ namespace HistoryJeopardy.Models;
 public record Question(
     [JsonProperty("price")] int Price,
     [JsonProperty("question")] string Text,
-    [JsonProperty("answer")] IAnswer Answer
+    [JsonProperty("answer")] Answer Answer
 );
