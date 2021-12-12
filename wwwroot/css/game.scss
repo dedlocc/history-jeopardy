@@ -82,14 +82,12 @@ $yellowShadowColor: #ffc107a0;
 
 #answer-input {
     display: none;
+    //margin-top: 1em;
+    margin: 1.5em auto 0;
 
-    input {
-        margin-top: 1em;
+    input[type=text] {
         font-size: 2em;
         border-radius: 10px;
-
-        transform: scale(.993, .94);
-        transition: transform .5s, opacity .25s;
 
         &:focus {
             border-color: var(--bs-yellow);
@@ -117,5 +115,24 @@ $yellowShadowColor: #ffc107a0;
 
     .score {
         font-weight: bold;
+    }
+}
+
+.form-check {
+    margin: 1em auto 0;
+    //border: 2px solid gray;
+    //border-radius: 5px;
+    //background-color: purple;
+    text-align: left;
+
+
+    .form-check-input {
+        font-size: 2em;
+        margin-top: 0.4em;
+    }
+
+    .form-check-label {
+        color: var(--bs-yellow);
+        font-size: 2em;
     }
 }
