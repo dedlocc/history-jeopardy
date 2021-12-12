@@ -9,54 +9,47 @@
                 $('.score').text(result.playerPoints);
 
                 $(this).addClass('completed').unbind();
-                $('#question').hide();
+                $('#question').html('');
 
                 if (answer !== '') {
                     if (result.isCorrect) {
-                        $('#answer .correct').show();
+                        $('#answer-result .correct').show();
                     } else {
-                        $('#answer .wrong').show();
+                        $('#answer-result .wrong').show();
                     }
                 }
 
-                $('#answer-input').hide();
-                $('#answer .text').text(result.correctAnswer);
-                $('#answer').show();
+                $('#answer-result .text').text(result.correctAnswer);
+                $('#answer-result').show();
             }, 'json');
         };
-
-        $('#answer-input form').unbind().submit(function () {
-            const $answer = $(this).find('[name=answer]');
-            answerHandler($answer.val());
-            $answer.val('');
-
-            return false;
-        });
 
         $.post('/question', {questionId: $(this).data('question')}, question => {
             $('#question').html(question).show();
 
-            /*if (question.picture) {
-                $('#question .picture').attr('src', question.picture).show();
-            } else {
-                $('#question .picture').hide();
-            }
-
-            $('#question > button').show();
-            $('#question').show();
-
-            $('#question button.answer').unbind().click(() => {
+            $('#question button.answer').click(() => {
                 $('#question > button').hide();
-                $('#answer-input').show();
+
+                $('#answer-input').submit(function () {
+                    const $answer = $(this).find('[name=answer]');
+                    if ($answer.prop('type') === 'text') {
+                        answerHandler($answer.val());
+                    } else {
+                        answerHandler($answer.filter(':checked').map(function () {
+                            return $(this).next().text();
+                        }).toArray().join('|'));
+                    }
+                    return false;
+                }).show();
             });
 
-            $('#question button.skip').unbind().click(() => answerHandler(''));*/
+            $('#question button.skip').click(() => answerHandler(''));
         });
     });
 
-    $('#answer button').unbind().click(() => {
-        $('#answer').hide();
-        $('#answer .status').hide();
+    $('#answer-result button').unbind().click(() => {
+        $('#answer-result').hide();
+        $('#answer-result .status').hide();
         $('#game-grid').show();
 
         if ($('#game-grid td:not(.completed)').length === 0) {

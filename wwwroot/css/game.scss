@@ -49,7 +49,7 @@ $yellowShadowColor: #ffc107a0;
     }
 }
 
-#question, #answer {
+#question, #answer-result {
     display: none;
 
     .content {
@@ -80,27 +80,6 @@ $yellowShadowColor: #ffc107a0;
     }
 }
 
-#game-finished, #win, #lose {
-    color: var(--bs-yellow);
-    font-size: 3em;
-    padding: .5em;
-    text-shadow: 0 0 .5em $yellowShadowColor;
-}
-
-#answer .status {
-    font-size: 2em;
-    display: none;
-}
-
-#score-container {
-    text-align: right;
-    font-size: 2.7em;
-
-    .score {
-        font-weight: bold;
-    }
-}
-
 #answer-input {
     display: none;
 
@@ -117,5 +96,26 @@ $yellowShadowColor: #ffc107a0;
             outline: 0;
             box-shadow: 0 0 .25em .05em $yellowShadowColor;
         }
+    }
+}
+
+#answer-result .status {
+    display: none;
+    font-size: 2em;
+}
+
+#game-finished, #win, #lose {
+    color: var(--bs-yellow);
+    font-size: 3em;
+    padding: .5em;
+    text-shadow: 0 0 .5em $yellowShadowColor;
+}
+
+#score-container {
+    text-align: right;
+    font-size: 2.7em;
+
+    .score {
+        font-weight: bold;
     }
 }
