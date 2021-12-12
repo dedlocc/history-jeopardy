@@ -5,14 +5,21 @@
 
         const answerHandler = answer => {
             $.post('/answer', {answer}, result => {
-                const prefix = answer ? (result.isCorrect ? 'Правильно' : 'Нет') + '. ' : '';
 
                 $('.score').text(result.playerPoints);
 
                 $(this).addClass('completed').unbind();
                 $('#question').hide();
 
-                $('#answer .text').text(prefix + result.correctAnswer);
+                if (answer) {
+                    if (result.isCorrect) {
+                        $('#answer .correct').show();
+                    } else {
+                        $('#answer .wrong').show();
+                    }
+                }
+
+                $('#answer .text').text(result.correctAnswer);
                 $('#answer').show();
             }, 'json');
         }
@@ -27,9 +34,10 @@
             $('#question button.skip').unbind().click(() => answerHandler(null));
         });
     });
-    
-    $('#answer button').click(function () {
+
+    $('#answer button').click(() => {
         $('#answer').hide();
+        $('#answer .status').hide();
         $('#game-grid').show();
 
         if ($('#game-grid td:not(.completed)').length === 0) {

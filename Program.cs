@@ -1,6 +1,4 @@
 using HistoryJeopardy.Services;
-using HistoryJeopardy.Util;
-using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
