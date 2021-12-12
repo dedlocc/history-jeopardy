@@ -1,6 +1,5 @@
 using HistoryJeopardy.Models;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace HistoryJeopardy.Util;
 

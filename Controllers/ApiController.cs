@@ -42,24 +42,27 @@ public class ApiController : BaseController
     }
 
     [HttpPost("/answer")]
-    public IActionResult Answer([FromForm] string answer)
+    public IActionResult Answer([FromForm] string? answer)
     {
         if (!PlayerService.TryGet(HttpContext, out var player)) {
             return StatusCode(StatusCodes.Status403Forbidden);
         }
 
         var game = player.Game;
-        var question = game?.CurrentQuestion;
-        if (game is null || !game.TryGetAnswer(out var correctAnswer)) {
+
+        if (game is null || !game.TryCompleteQuestion(out var question)) {
             return BadRequest();
         }
 
-        var isCorrect = correctAnswer.Match(answer);
-        player.Points += isCorrect ? question!.Price : -question!.Price;
+        var isCorrect = answer is not null && question.Answer.Match(answer);
+
+        if (answer is not null) {
+            player.Points += isCorrect ? question.Price : -question.Price;
+        }
 
         return Json(new {
             IsCorrect = isCorrect,
-            CorrectAnswer = correctAnswer.Get(),
+            CorrectAnswer = question.Answer.Get(),
             PlayerPoints = player.Points,
         });
     }

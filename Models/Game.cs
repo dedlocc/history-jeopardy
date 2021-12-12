@@ -31,20 +31,21 @@ public class Game
         Pack = options.Pack;
     }
 
-    public bool TryGetAnswer([MaybeNullWhen(false)] out IAnswer answer)
+    public bool TryCompleteQuestion([MaybeNullWhen(false)] out Question question)
     {
         if (CurrentQuestion is null) {
-            answer = null;
+            question = null;
             return false;
         }
 
-        CompletedQuestions.Add(CurrentQuestion);
+        question = CurrentQuestion;
+
+        CompletedQuestions.Add(question);
         if (CompletedQuestions.Count == CurrentRound.Questions.Count) {
             ++CurrentRoundId;
             CompletedQuestions.Clear();
         }
 
-        answer = CurrentQuestion.Answer;
         CurrentQuestion = null;
         return true;
     }

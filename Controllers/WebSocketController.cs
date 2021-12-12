@@ -1,7 +1,6 @@
 using HistoryJeopardy.Models;
 using HistoryJeopardy.Services;
 using HistoryJeopardy.Socket;
-using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Serialization;
 using StreamJsonRpc;

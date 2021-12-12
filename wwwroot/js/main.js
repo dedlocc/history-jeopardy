@@ -5,6 +5,8 @@
 }*/
 
 $(() => {
+    'use strict';
+
     for (const action of ['create', 'join']) {
         $(`#${action}-btn`).click(function () {
             $.ajax(`/${action}`, {
