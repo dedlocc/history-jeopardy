@@ -14,9 +14,9 @@ public class Game
 
     public readonly Pack Pack;
 
-    public int CurrentRoundId { get; private set; } = 0;
+    public int CurrentRoundId { get; private set; }
     public Round CurrentRound => Pack.Rounds[CurrentRoundId];
-    public Question? CurrentQuestion = null;
+    public Question? CurrentQuestion;
 
     public readonly HashSet<Question> CompletedQuestions = new();
 
@@ -48,6 +48,11 @@ public class Game
 
         CurrentQuestion = null;
         return true;
+    }
+
+    public bool IsFinished()
+    {
+        return CurrentRoundId == Pack.Rounds.Count;
     }
 }
 

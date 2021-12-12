@@ -5,26 +5,41 @@
     var game = player.Game!;
 }
 
-<div id="score-container">Score: <span class="score">@player.Points</span></div>
-<table id="game-grid">
-    <caption>Раунд @(new string('I', game.CurrentRoundId + 1)): @game.CurrentRound.Title</caption>
-    <tbody>
-    @foreach (var (category, i) in game.CurrentRound.Categories.Select((c, i) => (c, i))) {
-        <tr>
-            <th scope="row">@category.Name</th>
-            @foreach (var (question, j) in category.Questions.Select((c, j) => (c, j))) {
-                <td data-question="@i-@j"@Html.Raw(game.CompletedQuestions.Contains(question) ? "class=\"completed\"" : "")>@question.Price</td>
-            }
-        </tr>
+@if (game.IsFinished()) {
+    <div id="game-finished">
+        Игра закончена, ваш счёт - @player.Points
+    </div>
+    @if (player.Points >= 1000) {
+        <div id="win">
+            Поздравляем, вы победили
+        </div>
+    } else {
+        <div id="lose">
+            Очень жаль, вы проиграли
+        </div>
     }
-    </tbody>
-</table>
+} else {
+    <div id="score-container">Счёт: <span class="score">@player.Points</span></div>
+    <table id="game-grid">
+        <caption>Раунд @(new string('I', game.CurrentRoundId + 1)): @game.CurrentRound.Title</caption>
+        <tbody>
+        @foreach (var (category, i) in game.CurrentRound.Categories.Select((c, i) => (c, i))) {
+            <tr>
+                <th scope="row">@category.Name</th>
+                @foreach (var (question, j) in category.Questions.Select((c, j) => (c, j))) {
+                    <td data-question="@i-@j"@Html.Raw(game.CompletedQuestions.Contains(question) ? "class=\"completed\"" : "")>@question.Price</td>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+}
 
 <div id="question">
     <div class="text"></div>
     <button type="button" class="btn btn-success answer">Я знаю ответ</button>
     <button type="button" class="btn btn-danger skip">Я не знаю ответ</button>
-    
+
     <div id="answer-input">
         <form class="answer-input-form">
             <input class="form-control" name="answer" placeholder="Введите ответ"/>

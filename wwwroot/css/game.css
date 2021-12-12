@@ -57,6 +57,13 @@
   font-size: min(1vmin + 1vmax, 16px);
 }
 
+#game-finished, #win, #lose {
+  color: var(--bs-yellow);
+  font-size: 3em;
+  padding: 0.5em;
+  text-shadow: 0 0 0.5em #ffc107a0;
+}
+
 #answer .status {
   font-size: 2em;
   display: none;

@@ -1,5 +1,5 @@
 $bgColor: #084298;
-$yellowTextColor: #ffc107a0;
+$yellowShadowColor: #ffc107a0;
 
 #game-grid {
     width: 100%;
@@ -40,7 +40,7 @@ $yellowTextColor: #ffc107a0;
 
         &:not(.completed) {
             cursor: pointer;
-            text-shadow: 0 0 1.5rem $yellowTextColor;
+            text-shadow: 0 0 1.5rem $yellowShadowColor;
 
             &:hover {
                 background: darken($bgColor, 7%);
@@ -59,7 +59,7 @@ $yellowTextColor: #ffc107a0;
         font-size: 2.5em;
         border-radius: 10px;
         padding: .5em;
-        text-shadow: 0 0 .5em $yellowTextColor;
+        text-shadow: 0 0 .5em $yellowShadowColor;
     }
 
     button {
@@ -67,6 +67,13 @@ $yellowTextColor: #ffc107a0;
         padding: .6em 1em;
         font-size: min(1vmin + 1vmax, 16px);
     }
+}
+
+#game-finished, #win, #lose {
+    color: var(--bs-yellow);
+    font-size: 3em;
+    padding: .5em;
+    text-shadow: 0 0 .5em $yellowShadowColor;
 }
 
 #answer .status {
@@ -94,6 +101,6 @@ $yellowTextColor: #ffc107a0;
         transform: scale(.993, .94);
         transition: transform .5s, opacity .25s;
 
-        box-shadow: 0 0 1em $yellowTextColor;
+        box-shadow: 0 0 1em $yellowShadowColor;
     }
 }
