@@ -15,19 +15,11 @@
 
 <form id="answer-input">
     @switch (answer) {
-        case SingleOptionAnswer a:
+        case BaseOptionAnswer a:
             @foreach (var (option, i) in a.Options.All.Shuffle().Select((e, i) => (e, i))) {
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="answer" id="answer-@i">
-                    <label class="form-check-label" for="answer-@i">@option</label>
-                </div>
-            }
-            break;
-        case MultiOptionAnswer a:
-            @foreach (var (option, i) in a.Options.All.Shuffle().Select((e, i) => (e, i))) {
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="answer" id="answer-@i">
-                    <label class="form-check-label" for="answer-@i">@option</label>
+                    <input class="form-check-input" type="@(a is MultiOptionAnswer ? "checkbox": "radio")" name="answer" id="answer-@i">
+                    <label class="form-check-label" for="answer-@i">@string.Concat(option[0].ToString().ToUpper(), option.AsSpan(1))</label>
                 </div>
             }
             break;
