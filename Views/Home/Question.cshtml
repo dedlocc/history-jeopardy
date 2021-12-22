@@ -13,9 +13,6 @@
     <p class="text">@question.Text</p>
 </div>
 
-<button type="button" class="btn btn-success answer">Я знаю ответ</button>
-<button type="button" class="btn btn-danger skip">Я не знаю ответ</button>
-
 <form id="answer-input">
     @switch (answer) {
         case SingleOptionAnswer a:
@@ -38,5 +35,6 @@
             <input class="form-control" name="answer" type="text" placeholder="Введите ответ">
             break;
     }
-    <button type="submit" class="btn btn-success">Отправить</button>
+    <button type="submit" class="btn btn-success answer">Отправить</button>
+    <button type="button" class="btn btn-danger skip" title="Вы не потеряете очки">Я не знаю ответ</button>
 </form>

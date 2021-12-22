@@ -21,29 +21,30 @@
 
                 $('#answer-result .text').text(result.correctAnswer);
                 $('#answer-result').show();
+                $('#answer-result button').focus();
             }, 'json');
         };
 
         $.post('/question', {questionId: $(this).data('question')}, question => {
             $('#question').html(question).show();
 
-            $('#question button.answer').click(() => {
-                $('#question > button').hide();
+            const $form = $('#answer-input');
 
-                $('#answer-input').submit(function () {
-                    const $answer = $(this).find('[name=answer]');
-                    if ($answer.prop('type') === 'text') {
-                        answerHandler($answer.val());
-                    } else {
-                        answerHandler($answer.filter(':checked').map(function () {
-                            return $(this).next().text();
-                        }).toArray().join('|'));
-                    }
-                    return false;
-                }).show();
+            $form.submit(function () {
+                const $answer = $(this).find('[name=answer]');
+                if ($answer.prop('type') === 'text') {
+                    answerHandler($answer.val());
+                } else {
+                    answerHandler($answer.filter(':checked').map(function () {
+                        return $(this).next().text();
+                    }).toArray().join('|'));
+                }
+                return false;
             });
 
-            $('#question button.skip').click(() => answerHandler(''));
+            $form.find('button.skip').click(() => answerHandler(''));
+
+            $form.find('input').focus();
         });
     });
 
