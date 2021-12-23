@@ -9,6 +9,6 @@ public class ExactAnswer : Answer
 
     public override bool Match(string answer)
     {
-        return Answers.Any(kw => kw.Equals(answer, StringComparison.InvariantCultureIgnoreCase));
+        return Answers.Any(kw => answer.Equals(kw, StringComparison.InvariantCultureIgnoreCase));
     }
 }
