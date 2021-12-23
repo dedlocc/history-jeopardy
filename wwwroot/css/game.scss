@@ -106,6 +106,10 @@ $yellowShadowColor: #ffc107a0;
     font-size: 2em;
 }
 
+#answer-result .text {
+    white-space: pre-line;
+}
+
 #game-finished, #win, #lose {
     color: var(--bs-yellow);
     font-size: 3em;
