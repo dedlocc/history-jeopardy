@@ -81,8 +81,13 @@ $yellowShadowColor: #ffc107a0;
 
 #answer-input {
     //margin-top: 1em;
-    width: max-content;
-    margin: 1.5em auto 0;
+    margin-top: 1.5em;
+
+    .answer-options {
+        width: max-content;
+        max-width: calc(100% - 3em);
+        margin: 0 auto;
+    }
 
     input[type=text] {
         font-size: 2em;
