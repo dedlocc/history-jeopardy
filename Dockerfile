@@ -2,10 +2,7 @@
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
-
-# RUN apt install mariadb-server
-# RUN <cmd>
-# ARG <name>
+LABEL org.opencontainers.image.source=https://github.com/dedlocc/history-jeopardy
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src

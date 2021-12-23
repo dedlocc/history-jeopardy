@@ -14,10 +14,9 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment()) {
-    app.UseExceptionHandler("/home/error");
+    app.UseHttpsRedirection();
 }
 
-// app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseSession();
