@@ -9,6 +9,6 @@ public class KeywordsAnswer : Answer
 
     public override bool Match(string answer)
     {
-        return Keywords.Any(kw => answer.Contains(kw, StringComparison.InvariantCultureIgnoreCase));
+        return Keywords.Any(kw => kw.Contains(answer, StringComparison.InvariantCultureIgnoreCase));
     }
 }

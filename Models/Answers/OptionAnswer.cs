@@ -13,7 +13,7 @@ public class SingleOptionAnswer : BaseOptionAnswer
 {
     public override bool Match(string answer)
     {
-        return Options.Correct.First() == answer;
+        return Options.Correct.First().Equals(answer, StringComparison.InvariantCultureIgnoreCase);
     }
 }
 
