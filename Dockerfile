@@ -1,7 +1,9 @@
 ﻿FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+
+EXPOSE 8082
+ENV ASPNETCORE_URLS=http://*:8082
+
 LABEL org.opencontainers.image.source=https://github.com/dedlocc/history-jeopardy
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
