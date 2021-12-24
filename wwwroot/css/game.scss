@@ -51,6 +51,7 @@ $yellowShadowColor: #ffc107a0;
 
 #question, #answer-result {
     display: none;
+    white-space: pre-line;
 
     .content {
         border: 3px solid gray;
@@ -104,10 +105,6 @@ $yellowShadowColor: #ffc107a0;
 #answer-result .status {
     display: none;
     font-size: 2em;
-}
-
-#answer-result .text {
-    white-space: pre-line;
 }
 
 #game-finished, #win, #lose {
