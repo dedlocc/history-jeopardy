@@ -51,7 +51,6 @@ $yellowShadowColor: #ffc107a0;
 
 #question, #answer-result {
     display: none;
-    white-space: pre-line;
 
     .content {
         border: 3px solid gray;
@@ -70,6 +69,7 @@ $yellowShadowColor: #ffc107a0;
             color: var(--bs-yellow);
             text-shadow: 0 0 .5em $yellowShadowColor;
             margin: 0;
+            white-space: pre-line;
         }
     }
 
